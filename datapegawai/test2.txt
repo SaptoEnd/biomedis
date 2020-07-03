@@ -1,0 +1,83 @@
+<?php
+include '../koneksi_data_base.php';
+
+?>
+
+<!DOCTYPE html>
+<html>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<body>
+
+
+
+<div class="container">
+  <h2 align="center">Daftar Pegawai <a href="?page=pegawai&&aksi=tambah" type="button" class="btn btn-info"></a></h2>
+  <form action="" method="POST">
+  <table class="table table-striped"><hr>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th><center>ID</center></th>
+            <th><center>Nama</center></th>
+            <th><center>Pin Pegawai</center></th>
+            <th><center>Jenis Pegawai</center></th>
+            <th><center>Action</center></th>
+        </tr>
+    </thead>
+	<?php
+	$query="SELECT * FORM pegawai";
+	$result=mysqli_query($conn,$query); ?>
+        <?php 
+		if(mysqli_num_rows($result)>0)
+		{ ?>
+			<?php
+				$no = 1;
+				while($data = mysqli_fetch_array($result)){
+			?>
+				<tbody>
+					<tr>
+						 <td>
+						 <?php echo $no ?>            
+						 </td>
+						 
+						<td>
+						  <center><?php echo $data['ID_PEGAWAI'];?></center>
+						</td>
+
+						<td>
+						  <center><?php echo $data['NAMA'];?></center>
+						</td>
+
+						<td>
+						  <center><?php echo $data['PIN_PEGAWAI'];?></center>
+						</td>
+
+						<td>
+						  <center><?php echo $data['ID_TIPE'];?></center>
+						</td>
+
+						<td>
+						  <center>
+						   <a href="?aksi=edit&id="" type="button" name="edit_saran" class="btn btn-warning">Edit</a>
+							<a href="saran/hapus.php?id="" type="button" name="hapus_saran" class="btn btn-danger" 
+							onclick="return confirm('Apakah anda yakin menghapus data ini ?')">Hapus</a>
+						  </center>
+						</td>
+					   
+					</tr>
+				</tbody>
+					<?php $no++; } ?>
+			<?php } ?>
+			  </table>
+			  </form>
+
+			</div><br><br>
+
+
+			</body>
+</html>
